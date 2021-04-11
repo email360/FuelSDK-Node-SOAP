@@ -38,7 +38,7 @@ describe('SOAP Action - update', function() {
 	simpleVerifyTestCases.forEach(function(testCase) {
 		it('should call soapRequest with correct ' + testCase.property, function() {
 			// Act
-			FuelSoap.prototype.update('Test', { props: true }, { options: true }, function() {});
+			FuelSoap.prototype.update('Test', [{ props: true }], { options: true }, function() {});
 
 			// Assert
 			assert.equal(soapRequestSpy.args[0][0][testCase.property], testCase.expected);
@@ -48,7 +48,7 @@ describe('SOAP Action - update', function() {
 	it('should pass correct body to soapRequest', function() {
 		// Arrange
 		var sampleOptions = { options: true, moar: false };
-		var sampleProps   = { props: true };
+		var sampleProps   = [{ props: true }];
 
 		// Act
 		FuelSoap.prototype.update('Test', sampleProps, sampleOptions, function() {});
@@ -65,7 +65,7 @@ describe('SOAP Action - update', function() {
 		var sampleCallback = sinon.spy();
 
 		// Act
-		FuelSoap.prototype.update('Test', { data: true }, sampleCallback);
+		FuelSoap.prototype.update('Test', [{ data: true }], sampleCallback);
 
 		// Assert
 		assert.ok(soapRequestSpy.calledWith(sinon.match.object, sampleCallback));
@@ -76,7 +76,7 @@ describe('SOAP Action - update', function() {
 		var sampleCallback = sinon.spy();
 
 		// Act
-		FuelSoap.prototype.update('Test', { data: true }, { options: true }, sampleCallback);
+		FuelSoap.prototype.update('Test', [{ data: true }], { options: true }, sampleCallback);
 
 		// Assert
 		assert.ok(soapRequestSpy.calledWith(sinon.match.object, sampleCallback));
@@ -85,7 +85,7 @@ describe('SOAP Action - update', function() {
 	it('should add QueryAllAccounts to body when option passed', function() {
 		// Arrange
 		var sampleOptions = { queryAllAccounts: true };
-		var sampleProps   = { props: true };
+		var sampleProps   = [{ props: true }];
 
 		// Act
 		FuelSoap.prototype.update('Test', sampleProps, sampleOptions, function() {});
